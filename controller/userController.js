@@ -28,10 +28,10 @@ exports.login = async (req, res) => {
     if (!user) return res.status(404).json({ error: 'User not found' });
 
     const isMatched = await user.comparePassword(password);
-    if (!isMatched) return res.status(400).json({ error: 'Invalid password' });
+    if (!isMatched) return res.json({ error: 'Invalid password' });
 
     const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.json({ message: 'Login successful', token });
+    res.status(200).json({ message: 'Login successful', token });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

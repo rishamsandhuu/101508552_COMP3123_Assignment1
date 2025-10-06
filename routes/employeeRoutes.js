@@ -4,8 +4,8 @@ const {
   createEmployee,
   getEmployees,
   getEmployeeById,
-  updateEmployee
-    //deleteEmployee
+  updateEmployee,
+  deleteEmployee
 } = require('../controller/employeeController');
 const handleValidation = require('../middleware/handleValidation');
 const authMiddleware = require('../middleware/authMiddleware'); 
@@ -61,7 +61,7 @@ router.put(
 
 // Delete employee
 router.delete(
-  '/:id',
+  '/employees/:id',
   authMiddleware,
   [param('id').isMongoId().withMessage('Invalid employee ID')],
   handleValidation,
