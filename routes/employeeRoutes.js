@@ -1,11 +1,11 @@
 const express = require('express');
 const { body, param } = require('express-validator');
 const {
-  createEmployee
-  //getEmployees,
-  //getEmployeeById,
-  //updateEmployee,
-  //deleteEmployee
+  createEmployee,
+  getEmployees,
+  getEmployeeById,
+  updateEmployee
+    //deleteEmployee
 } = require('../controller/employeeController');
 const handleValidation = require('../middleware/handleValidation');
 const authMiddleware = require('../middleware/authMiddleware'); 
@@ -29,43 +29,43 @@ router.post(
   createEmployee
 );
 
-// // Get all employees
-// router.get('/', authMiddleware, getEmployees);
+// Get all employees
+router.get('/employees', authMiddleware, getEmployees);
 
-// // Get employee by ID
-// router.get(
-//   '/:id',
-//   authMiddleware,
-//   [param('id').isMongoId().withMessage('Invalid employee ID')],
-//   handleValidation,
-//   getEmployeeById
-// );
+// Get employee by ID
+router.get(
+  '/employees/:id',
+  authMiddleware,
+  [param('id').isMongoId().withMessage('Invalid employee ID')],
+  handleValidation,
+  getEmployeeById
+);
 
-// // Update employee
-// router.put(
-//   '/:id',
-//   authMiddleware,
-//   [
-//     param('id').isMongoId().withMessage('Invalid employee ID'),
-//     body('first_name').optional().notEmpty(),
-//     body('last_name').optional().notEmpty(),
-//     body('email').optional().isEmail(),
-//     body('position').optional().notEmpty(),
-//     body('salary').optional().isNumeric(),
-//     body('date_of_joining').optional().isISO8601().toDate(),
-//     body('department').optional().notEmpty()
-//   ],
-//   handleValidation,
-//   updateEmployee
-// );
+// Update employee
+router.put(
+  '/employees/:id',
+  authMiddleware,
+  [
+    param('id').isMongoId().withMessage('Invalid employee ID'),
+    body('first_name').optional().notEmpty(),
+    body('last_name').optional().notEmpty(),
+    body('email').optional().isEmail(),
+    body('position').optional().notEmpty(),
+    body('salary').optional().isNumeric(),
+    body('date_of_joining').optional().isISO8601().toDate(),
+    body('department').optional().notEmpty()
+  ],
+  handleValidation,
+  updateEmployee
+);
 
-// // Delete employee
-// router.delete(
-//   '/:id',
-//   authMiddleware,
-//   [param('id').isMongoId().withMessage('Invalid employee ID')],
-//   handleValidation,
-//   deleteEmployee
-// );
+// Delete employee
+router.delete(
+  '/:id',
+  authMiddleware,
+  [param('id').isMongoId().withMessage('Invalid employee ID')],
+  handleValidation,
+  deleteEmployee
+);
 
 module.exports = router;
