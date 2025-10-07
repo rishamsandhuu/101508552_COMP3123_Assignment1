@@ -6,7 +6,7 @@
 
 ### **Course:** COMP 3123 – Full Stack Development
 
-### **Instructor:** Pritesh Patel
+### **Instructor:** Pritesh Patel, Akansha Mandhana
 
 ---
 
