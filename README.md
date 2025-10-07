@@ -1,4 +1,4 @@
-##  COMP3123 – Assignment 1 
+## COMP3123 – Assignment 1
 
 ### **Student Name:** Rishamnoor Kaur
 
@@ -8,14 +8,13 @@
 
 ### **Instructor:** Pritesh Patel
 
-
 ---
 
 ## Project Overview
 
-This project is a **RESTful API** built using **Node.js**, **Express**, and **MongoDB**, implementing user and employee management with CRUD operations, validation, and optional JWT authentication.
+This project is a **RESTful API** built using **Node.js**, **Express**, and **MongoDB**, implementing **user** and **employee** management with **CRUD operations**, **validation**, and optional **JWT authentication**.
 
-The API allows users to **sign up**, **log in**, and manage **employee records** via secure endpoints that communicate using JSON.
+The API allows users to **sign up**, **log in**, and manage **employee records** via secure endpoints that communicate using **JSON**.
 
 ---
 
@@ -29,6 +28,7 @@ The API allows users to **sign up**, **log in**, and manage **employee records**
 * **express-validator** – Request validation
 * **dotenv** – Environment variable management
 
+---
 
 ## 👥 API Endpoints
 
@@ -47,6 +47,7 @@ The API allows users to **sign up**, **log in**, and manage **employee records**
     "email": "admin@example.com",
     "password": "admin123"
 }
+```
 
 ---
 
@@ -60,9 +61,13 @@ The API allows users to **sign up**, **log in**, and manage **employee records**
 | **PUT**    | `/employees/:eid`    | 200    | Update employee details        |
 | **DELETE** | `/employees?eid=xxx` | 204    | Delete employee by query param |
 
-##  Author
 
-**[Rishamnoor Kaur]**
-Student ID: **[101508552]**
-Email: **[rishamnoor.kaur@georgebrown.ca]**
+---
+
+## Author
+
+**Rishamnoor Kaur**
+Student ID: **101508552**
+Email: **[rishamnoor.kaur@georgebrown.ca](mailto:rishamnoor.kaur@georgebrown.ca)**
+
 
