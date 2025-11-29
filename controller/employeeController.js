@@ -1,11 +1,20 @@
+// controller/employeeController.js
 const Employee = require('../model/employee');
 
 // Create a new employee
 exports.createEmployee = async (req, res) => {
   try {
-    const employee = new Employee(req.body);
+    const data = { ...req.body };
+
+    if (req.file) {
+      data.profilePicture = `/uploads/${req.file.filename}`;
+    }
+
+    const employee = new Employee(data);
     await employee.save();
-    res.status(201).json({ message: 'Employee created successfully', "employee_id": employee._id  });
+    res
+      .status(201)
+      .json({ message: 'Employee created successfully', employee_id: employee._id });
   } catch (err) {
     if (err.code === 11000) {
       return res.status(400).json({ error: 'Email already exists' });
@@ -14,33 +23,44 @@ exports.createEmployee = async (req, res) => {
   }
 };
 
-//List Employees
+// Get all employees
 exports.getEmployees = async (req, res) => {
-    try{
-        const employees = await Employee.find();
-        res.status(200).json(employees)
-    }catch(err){
-        res.status(500).json({error: err.message});
-    }
-}
+  try {
+    const employees = await Employee.find();
+    res.status(200).json(employees);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 
-//Get Employee by ID 
+// Get employee by ID
 exports.getEmployeeById = async (req, res) => {
-    try{
-        const employee = await Employee.findById(req.params.id);
-        if(!employee) return res.status(404).json({error: "Employee Not Found"})
-        res.status(200).json(employee)
-    }catch(err){
-        res.status(500).json({error: err.message});
-    }
-}
+  try {
+    const employee = await Employee.findById(req.params.id);
+    if (!employee) return res.status(404).json({ error: 'Employee not found' });
+    res.status(200).json(employee);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 
-//Update Employee
+// Update an employee
 exports.updateEmployee = async (req, res) => {
   try {
-    const employee = await Employee.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const data = { ...req.body };
+
+    if (req.file) {
+      data.profilePicture = `/uploads/${req.file.filename}`;
+    }
+
+    const employee = await Employee.findByIdAndUpdate(req.params.id, data, {
+      new: true,
+      runValidators: true
+    });
+
     if (!employee) return res.status(404).json({ error: 'Employee not found' });
-    res.status(200).json({ message: 'Employee updated successfully' });
+
+    res.status(200).json({ message: 'Employee updated successfully', employee });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -51,7 +71,7 @@ exports.deleteEmployee = async (req, res) => {
   try {
     const employee = await Employee.findByIdAndDelete(req.params.id);
     if (!employee) return res.status(404).json({ error: 'Employee not found' });
-    res.status(204).send(); // No content, correct usage for 204
+    res.status(204).send();
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
