@@ -15,7 +15,11 @@ const Login = () => {
     e.preventDefault();
     setError('');
     try {
-      const res = await api.post('/user/login', { usernameOrEmail, password });
+      const res = await api.post('/api/backend/user/login', {
+        usernameOrEmail,
+        password
+      });
+
       if (res.data.token) {
         login(res.data.token);
         navigate('/employees');

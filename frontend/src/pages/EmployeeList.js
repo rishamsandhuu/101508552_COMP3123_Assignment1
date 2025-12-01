@@ -4,25 +4,30 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import api from '../api/axiosInstance';
 
+// Fetch employees (with optional filters)
 const fetchEmployees = async (searchParams) => {
   const { department, position } = searchParams || {};
   const params = {};
   if (department) params.department = department;
   if (position) params.position = position;
 
-  const url = department || position ? '/emp/employees/search' : '/emp/employees';
+  const url = department || position
+    ? '/api/backend/emp/employees/search'
+    : '/api/backend/emp/employees';
+
   const res = await api.get(url, { params });
   return res.data;
 };
 
+// Delete employee by ID
 const deleteEmployee = async (id) => {
-  await api.delete(`/emp/employees/${id}`);
+  await api.delete(`/api/backend/emp/employees/${id}`);
 };
 
 const EmployeeList = () => {
   const [department, setDepartment] = useState('');
-  const [position, setPosition]     = useState('');
-  const [search, setSearch]         = useState({ department: '', position: '' });
+  const [position, setPosition] = useState('');
+  const [search, setSearch] = useState({ department: '', position: '' });
 
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -102,7 +107,7 @@ const EmployeeList = () => {
                 <td>
                   {emp.profilePicture && (
                     <img
-                      src={`http://localhost:5000${emp.profilePicture}`}
+                      src={`/api/backend${emp.profilePicture}`}
                       alt="profile"
                       width={50}
                       height={50}

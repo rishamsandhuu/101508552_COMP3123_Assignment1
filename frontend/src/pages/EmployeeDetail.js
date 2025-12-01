@@ -3,8 +3,9 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../api/axiosInstance';
 
+// Fetch a single employee by ID
 const fetchEmployee = async (id) => {
-  const res = await api.get(`/emp/employees/${id}`);
+  const res = await api.get(`/api/backend/emp/employees/${id}`);
   return res.data;
 };
 
@@ -23,14 +24,16 @@ const EmployeeDetail = () => {
   return (
     <div>
       <h2>Employee Detail</h2>
+
       {emp.profilePicture && (
         <img
-          src={`http://localhost:5000${emp.profilePicture}`}
+          src={`/api/backend${emp.profilePicture}`}
           alt="profile"
           width={100}
           height={100}
         />
       )}
+
       <p><strong>Name:</strong> {emp.first_name} {emp.last_name}</p>
       <p><strong>Email:</strong> {emp.email}</p>
       <p><strong>Position:</strong> {emp.position}</p>
