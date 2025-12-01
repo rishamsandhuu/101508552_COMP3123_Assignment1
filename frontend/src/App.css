@@ -1,38 +1,137 @@
-.App {
-  text-align: center;
+/* Global resets */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", Arial, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background: #f5f7fa;
+  color: #222;
+  line-height: 1.6;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Centered container used for Login/Signup */
+.page-container {
+  max-width: 450px;
+  background: #ffffff;
+  padding: 30px;
+  margin: 60px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Headers */
+h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Form styling */
+form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+form input,
+form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: 0.2s;
+  font-size: 15px;
+}
+
+form input:focus {
+  outline: none;
+  border-color: #0070f3;
+}
+
+/* Buttons */
+button {
+  padding: 10px 16px;
+  background: #0070f3;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #0059c9;
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  background: white;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+}
+
+table th {
+  background: #eef1f5;
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+table td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+table tr:hover {
+  background: #f9fafb;
+}
+
+/* Profile image */
+img {
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+/* Navbar */
+.navbar {
+  background: #ffffff;
+  padding: 12px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.navbar a {
+  margin-right: 15px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: 0.2s;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar a:hover {
+  color: #0070f3;
+}
+
+/* Error & success messages */
+.error {
+  color: #d9534f;
+  margin-bottom: 10px;
+}
+
+.success {
+  color: #28a745;
+  margin-bottom: 10px;
 }
