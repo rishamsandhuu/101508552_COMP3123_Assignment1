@@ -54,6 +54,18 @@ router.post(
 // Get all employees
 router.get('/employees', authMiddleware, getEmployees);
 
+// Search employee by department/position
+router.get(
+  '/employees/search',
+  authMiddleware,
+  [
+    query('department').optional().isString(),
+    query('position').optional().isString()
+  ],
+  handleValidation,
+  searchEmployees
+);
+
 // Get employee by ID
 router.get(
   '/employees/:id',
@@ -87,16 +99,5 @@ router.delete(
   deleteEmployee
 );
 
-// Search employee by department/position
-router.get(
-  '/employees/search',
-  authMiddleware,
-  [
-    query('department').optional().isString(),
-    query('position').optional().isString()
-  ],
-  handleValidation,
-  searchEmployees
-);
 
 module.exports = router;
