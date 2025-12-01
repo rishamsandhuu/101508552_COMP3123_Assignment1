@@ -16,7 +16,7 @@ const Signup = () => {
     setError('');
     setSuccess('');
     try {
-      await api.post('/api/user/signup', { username, email, password });
+      await api.post('/user/signup', { username, email, password });
       setSuccess('Signup successful. You can now login.');
       setTimeout(() => navigate('/login'), 1000);
     } catch (err) {

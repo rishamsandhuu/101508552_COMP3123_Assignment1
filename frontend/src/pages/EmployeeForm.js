@@ -6,7 +6,7 @@ import api from '../api/axiosInstance';
 
 // Fetch a single employee by ID
 const fetchEmployee = async (id) => {
-  const res = await api.get(`/api/emp/employees/${id}`);
+  const res = await api.get(`/emp/employees/${id}`);
   return res.data;
 };
 
