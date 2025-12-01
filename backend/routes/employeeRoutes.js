@@ -48,6 +48,16 @@ router.post(
   createEmployee
 );
 
+router.get('/employees', authMiddleware, getEmployees);
+
+router.get(
+  '/employees/:id',
+  authMiddleware,
+  [param('id').isMongoId()],
+  handleValidation,
+  getEmployeeById
+);
+
 router.put(
   '/employees/:id',
   authMiddleware,
@@ -78,16 +88,6 @@ router.get(
   ],
   handleValidation,
   searchEmployees
-);
-
-router.get('/employees', authMiddleware, getEmployees);
-
-router.get(
-  '/employees/:id',
-  authMiddleware,
-  [param('id').isMongoId()],
-  handleValidation,
-  getEmployeeById
 );
 
 module.exports = router;
