@@ -1,4 +1,3 @@
-// routes/employeeRoutes.js
 const express = require('express');
 const { body, param, query } = require('express-validator');
 const multer = require('multer');
@@ -12,15 +11,15 @@ const {
   deleteEmployee,
   searchEmployees
 } = require('../controller/employeeController');
+
 const handleValidation = require('../middleware/handleValidation');
 const authMiddleware = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
-// Multer storage
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // make sure folder exists
+    cb(null, 'uploads/');
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
@@ -30,18 +29,16 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Validation for common employee fields
 const employeeValidation = [
-  body('first_name').notEmpty().withMessage('First name is required'),
-  body('last_name').notEmpty().withMessage('Last name is required'),
-  body('email').isEmail().withMessage('Valid email is required'),
-  body('position').notEmpty().withMessage('Position is required'),
-  body('salary').isNumeric().withMessage('Salary must be a number'),
-  body('date_of_joining').notEmpty().withMessage('Date of joining is required'),
-  body('department').notEmpty().withMessage('Department is required')
+  body('first_name').notEmpty(),
+  body('last_name').notEmpty(),
+  body('email').isEmail(),
+  body('position').notEmpty(),
+  body('salary').isNumeric(),
+  body('date_of_joining').notEmpty(),
+  body('department').notEmpty()
 ];
 
-// Create a new employee (with optional picture)
 router.post(
   '/employees',
   authMiddleware,
@@ -51,10 +48,27 @@ router.post(
   createEmployee
 );
 
-// Get all employees
-router.get('/employees', authMiddleware, getEmployees);
+router.put(
+  '/employees/:id',
+  authMiddleware,
+  upload.single('profilePicture'),
+  [
+    param('id').isMongoId(),
+    body('email').optional().isEmail(),
+    body('salary').optional().isNumeric()
+  ],
+  handleValidation,
+  updateEmployee
+);
 
-// Search employee by department/position
+router.delete(
+  '/employees/:id',
+  authMiddleware,
+  [param('id').isMongoId()],
+  handleValidation,
+  deleteEmployee
+);
+
 router.get(
   '/employees/search',
   authMiddleware,
@@ -66,38 +80,14 @@ router.get(
   searchEmployees
 );
 
-// Get employee by ID
+router.get('/employees', authMiddleware, getEmployees);
+
 router.get(
   '/employees/:id',
   authMiddleware,
-  [param('id').isMongoId().withMessage('Invalid employee ID')],
+  [param('id').isMongoId()],
   handleValidation,
   getEmployeeById
 );
-
-// Update employee (with optional picture)
-router.put(
-  '/employees/:id',
-  authMiddleware,
-  upload.single('profilePicture'),
-  [
-    param('id').isMongoId().withMessage('Invalid employee ID'),
-    // optional validation: fields can be optional on update
-    body('email').optional().isEmail().withMessage('Valid email is required'),
-    body('salary').optional().isNumeric().withMessage('Salary must be a number')
-  ],
-  handleValidation,
-  updateEmployee
-);
-
-// Delete employee
-router.delete(
-  '/employees/:id',
-  authMiddleware,
-  [param('id').isMongoId().withMessage('Invalid employee ID')],
-  handleValidation,
-  deleteEmployee
-);
-
 
 module.exports = router;
