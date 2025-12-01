@@ -15,7 +15,7 @@ const Login = () => {
     e.preventDefault();
     setError('');
     try {
-      const res = await api.post('/api/backend/user/login', {
+      const res = await api.post('/api/user/login', {
         usernameOrEmail,
         password
       });

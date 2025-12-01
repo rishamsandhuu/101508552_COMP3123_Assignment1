@@ -5,7 +5,7 @@ import api from '../api/axiosInstance';
 
 // Fetch a single employee by ID
 const fetchEmployee = async (id) => {
-  const res = await api.get(`/api/backend/emp/employees/${id}`);
+  const res = await api.get(`/api/emp/employees/${id}`);
   return res.data;
 };
 
@@ -27,7 +27,7 @@ const EmployeeDetail = () => {
 
       {emp.profilePicture && (
         <img
-          src={`/api/backend${emp.profilePicture}`}
+          src={`/api${emp.profilePicture}`}
           alt="profile"
           width={100}
           height={100}

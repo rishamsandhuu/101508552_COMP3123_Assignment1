@@ -6,7 +6,7 @@ import api from '../api/axiosInstance';
 
 // Fetch a single employee by ID
 const fetchEmployee = async (id) => {
-  const res = await api.get(`/api/backend/emp/employees/${id}`);
+  const res = await api.get(`/api/emp/employees/${id}`);
   return res.data;
 };
 
@@ -62,11 +62,11 @@ const EmployeeForm = () => {
       }
 
       if (isEdit) {
-        await api.put(`/api/backend/emp/employees/${id}`, formData, {
+        await api.put(`/api/emp/employees/${id}`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
       } else {
-        await api.post('/api/backend/emp/employees', formData, {
+        await api.post('/api/emp/employees', formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
       }

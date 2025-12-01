@@ -12,8 +12,8 @@ const fetchEmployees = async (searchParams) => {
   if (position) params.position = position;
 
   const url = department || position
-    ? '/api/backend/emp/employees/search'
-    : '/api/backend/emp/employees';
+    ? '/api/emp/employees/search'
+    : '/api/emp/employees';
 
   const res = await api.get(url, { params });
   return res.data;
@@ -21,7 +21,7 @@ const fetchEmployees = async (searchParams) => {
 
 // Delete employee by ID
 const deleteEmployee = async (id) => {
-  await api.delete(`/api/backend/emp/employees/${id}`);
+  await api.delete(`/api/emp/employees/${id}`);
 };
 
 const EmployeeList = () => {
@@ -107,7 +107,7 @@ const EmployeeList = () => {
                 <td>
                   {emp.profilePicture && (
                     <img
-                      src={`/api/backend${emp.profilePicture}`}
+                      src={`/api${emp.profilePicture}`}
                       alt="profile"
                       width={50}
                       height={50}
