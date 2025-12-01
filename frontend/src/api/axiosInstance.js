@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: ""
+  baseURL: "https://one01508552-comp3123-assignment1.onrender.com"
 });
 
 // Attach token automatically
