@@ -88,86 +88,35 @@ const EmployeeForm = () => {
   };
 
   return (
-    <div style={{ maxWidth: 500 }}>
-      <h2>{isEdit ? 'Edit Employee' : 'Add Employee'}</h2>
+    <div className="form-card">
+      <h2>{isEdit ? "Edit Employee" : "Add Employee"}</h2>
+
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>First Name</label>
-          <input
-            name="first_name"
-            value={form.first_name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Last Name</label>
-          <input
-            name="last_name"
-            value={form.last_name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Email</label>
-          <input
-            name="email"
-            type="email"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Position</label>
-          <input
-            name="position"
-            value={form.position}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Salary</label>
-          <input
-            name="salary"
-            type="number"
-            value={form.salary}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Date of Joining</label>
-          <input
-            name="date_of_joining"
-            type="date"
-            value={form.date_of_joining}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Department</label>
-          <input
-            name="department"
-            value={form.department}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Profile Picture</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setFile(e.target.files[0] || null)}
-          />
-        </div>
-        <button type="submit" style={{ marginTop: 10 }}>
-          {mutation.isPending ? 'Saving...' : 'Save'}
-        </button>
+        <label>First Name</label>
+        <input name="first_name" value={form.first_name} onChange={handleChange} required />
+
+        <label>Last Name</label>
+        <input name="last_name" value={form.last_name} onChange={handleChange} required />
+
+        <label>Email</label>
+        <input name="email" type="email" value={form.email} onChange={handleChange} required />
+
+        <label>Position</label>
+        <input name="position" value={form.position} onChange={handleChange} required />
+
+        <label>Salary</label>
+        <input name="salary" type="number" value={form.salary} onChange={handleChange} required />
+
+        <label>Date of Joining</label>
+        <input name="date_of_joining" type="date" value={form.date_of_joining} onChange={handleChange} required />
+
+        <label>Department</label>
+        <input name="department" value={form.department} onChange={handleChange} required />
+
+        <label>Profile Picture</label>
+        <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files[0])} />
+
+        <button type="submit">{mutation.isPending ? "Saving..." : "Save"}</button>
       </form>
     </div>
   );

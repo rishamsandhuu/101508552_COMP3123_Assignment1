@@ -59,80 +59,71 @@ const EmployeeList = () => {
   if (isError) return <p>Error loading employees</p>;
 
   return (
-    <div>
+    <div className="table-card">
       <h2>Employee List</h2>
 
-      <button onClick={() => navigate('/employees/new')} style={{ marginBottom: 10 }}>
-        Add Employee
-      </button>
+      <button onClick={() => navigate('/employees/new')}>Add Employee</button>
 
-      <form onSubmit={handleSearch} style={{ marginBottom: 20 }}>
-        <div>
-          <label>Department</label>
-          <input
-            value={department}
-            onChange={(e) => setDepartment(e.target.value)}
-            placeholder="IT, HR..."
-          />
-        </div>
-        <div>
-          <label>Position</label>
-          <input
-            value={position}
-            onChange={(e) => setPosition(e.target.value)}
-            placeholder="Manager, Developer..."
-          />
-        </div>
-        <button type="submit" style={{ marginTop: 5 }}>Search</button>
+      <form onSubmit={handleSearch}>
+        <label>Department</label>
+        <input
+          value={department}
+          onChange={(e) => setDepartment(e.target.value)}
+          placeholder="IT, HR..."
+        />
+
+        <label>Position</label>
+        <input
+          value={position}
+          onChange={(e) => setPosition(e.target.value)}
+          placeholder="Manager, Developer..."
+        />
+
+        <button type="submit">Search</button>
       </form>
 
-      <table border="1" cellPadding="5" cellSpacing="0" width="100%">
+      <table>
         <thead>
           <tr>
             <th>Profile</th>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Name</th>
             <th>Email</th>
             <th>Position</th>
             <th>Department</th>
             <th>Salary</th>
-            <th>Date of Joining</th>
+            <th>Date</th>
             <th>Actions</th>
           </tr>
         </thead>
+
         <tbody>
-          {employees && employees.length > 0 ? (
-            employees.map((emp) => (
-              <tr key={emp._id}>
-                <td>
-                  {emp.profilePicture && (
-                    <img
-                      src={`https://one01508552-comp3123-assignment1.onrender.com${emp.profilePicture}`}
-                      alt="profile"
-                      width={50}
-                      height={50}
-                    />
-                  )}
-                </td>
-                <td>{emp.first_name}</td>
-                <td>{emp.last_name}</td>
-                <td>{emp.email}</td>
-                <td>{emp.position}</td>
-                <td>{emp.department}</td>
-                <td>{emp.salary}</td>
-                <td>{new Date(emp.date_of_joining).toLocaleDateString()}</td>
-                <td>
-                  <button onClick={() => navigate(`/employees/${emp._id}`)}>View</button>{' '}
-                  <button onClick={() => navigate(`/employees/${emp._id}/edit`)}>Edit</button>{' '}
-                  <button onClick={() => handleDelete(emp._id)}>Delete</button>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="9">No employees found</td>
+          {employees?.map((emp) => (
+            <tr key={emp._id}>
+              <td>
+                {emp.profilePicture && (
+                  <img
+                    src={`https://one01508552-comp3123-assignment1.onrender.com${emp.profilePicture}`}
+                    width={50}
+                    height={50}
+                    className="profile-img"
+                  />
+                )}
+              </td>
+
+              <td>{emp.first_name} {emp.last_name}</td>
+              <td>{emp.email}</td>
+              <td>{emp.position}</td>
+              <td>{emp.department}</td>
+              <td>{emp.salary}</td>
+              <td>{new Date(emp.date_of_joining).toLocaleDateString()}</td>
+
+              <td>
+                <button onClick={() => navigate(`/employees/${emp._id}`)}>View</button>
+                <button onClick={() => navigate(`/employees/${emp._id}/edit`)}>Edit</button>
+                <button className="red" onClick={() => handleDelete(emp._id)}>Delete</button>
+              </td>
             </tr>
-          )}
+          ))}
         </tbody>
       </table>
     </div>
