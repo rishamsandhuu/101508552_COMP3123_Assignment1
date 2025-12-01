@@ -33,7 +33,6 @@ function App() {
                 <Route path="/employees/:id/edit" element={<EmployeeForm />} />
               </Route>
 
-              {/* fallback */}
               <Route path="*" element={<Login />} />
             </Routes>
           </div>

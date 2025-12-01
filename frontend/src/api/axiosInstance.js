@@ -1,8 +1,6 @@
 // src/api/axiosInstance.js
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:5000'; // adjust if deployed
-
 const api = axios.create({
   baseURL: ""
 });
