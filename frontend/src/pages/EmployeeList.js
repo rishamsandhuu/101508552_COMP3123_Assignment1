@@ -107,7 +107,7 @@ const EmployeeList = () => {
                 <td>
                   {emp.profilePicture && (
                     <img
-                      src={`/api${emp.profilePicture}`}
+                      src={`https://one01508552-comp3123-assignment1.onrender.com${emp.profilePicture}`}
                       alt="profile"
                       width={50}
                       height={50}
