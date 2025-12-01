@@ -4,7 +4,7 @@ import axios from 'axios';
 const API_BASE_URL = 'http://localhost:5000'; // adjust if deployed
 
 const api = axios.create({
-  baseURL: API_BASE_URL
+  baseURL: ""
 });
 
 // Attach token automatically
