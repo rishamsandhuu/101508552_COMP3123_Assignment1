@@ -62,11 +62,11 @@ const EmployeeForm = () => {
       }
 
       if (isEdit) {
-        await api.put(`/api/emp/employees/${id}`, formData, {
+        await api.put(`/emp/employees/${id}`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
       } else {
-        await api.post('/api/emp/employees', formData, {
+        await api.post('/emp/employees', formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
       }
